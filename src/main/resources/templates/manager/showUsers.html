@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息展示</title>
+    <script th:src="@{/static/js/jquery/jquery-1.11.3.min.js}"></script>
+    <script th:src="@{/static/js/manager/users.js}"></script>
+</head>
+<body>
+
+<table border="2px" align="center">
+    <tr>
+        <td colspan="3" align="center"><input type="button" onclick="add()" value="新增"></td>
+    </tr>
+    <tr>
+        <td>姓名</td>
+        <td>优点</td>
+        <td>操作</td>
+    </tr>
+    <tr class="trUser" th:each="u : ${users}">
+        <td th:text="${u.userName}"></td>
+        <td th:text="${u.advantage}"></td>
+        <td><input type="button" onclick="edit(this)" value="编辑"><input type="button" onclick="del(this)" value="删除"></td>
+        <td class="id" th:text="${u.id}" hidden></td>
+    </tr>
+</table>
+
+<div class="editBg" style="display:none">
+    <div>
+        <span>编辑场次</span>
+        <img class="addEditClose" th:src="@{/static/img/manager/close.png}">
+    </div>
+    <div>
+        <form id="editForm">
+            <input type="hidden" id="flag" name="flag">
+            <input type="hidden" id="id" name="id">
+            <div>
+                <div>姓名</div>
+                <input name="userName" id="userName">
+            </div>
+            <div>
+                <div>优点</div>
+                <input name="advantage" id="advantage">
+            </div>
+            <div>
+                <div onclick="editSubmit()">提交</div>
+                <div onclick="resetUser()">重置</div>
+            </div>
+            <input type="reset" name="reset" style="display: none;"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

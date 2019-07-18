@@ -1,0 +1,4 @@
+#mybatis配置（注解）
+mybatis:
+  type-aliases-package: com.aplaca.entity
+

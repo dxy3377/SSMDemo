@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alpaca.SSMDemo.mapper.UserMapperForXML">
+    <resultMap id="resultMap" type="com.alpaca.SSMDemo.entity.UserEntity">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="userName" property="userName" jdbcType="VARCHAR" />
+        <result column="advantage" property="advantage" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findAll" resultMap="resultMap">
+        select id,user_name as userName,advantage from users
+    </select>
+
+    <select id="findOneById" parameterType="java.lang.Integer" resultMap="resultMap">
+        select id,user_name as userName,advantage from users where id = #{id}
+    </select>
+    
+    <update id="updateUser" parameterType="com.alpaca.SSMDemo.entity.UserEntity">
+        update users
+        <set>
+            user_name = #{userName},advantage = #{advantage}
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    
+    <insert id="insertUser" parameterType="com.alpaca.SSMDemo.entity.UserEntity" flushCache="true">
+        insert into users(user_name, advantage) values(#{userName}, #{advantage})
+    </insert>
+    
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from users where id = #{id}
+    </delete>
+</mapper>
